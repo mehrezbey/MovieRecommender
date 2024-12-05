@@ -24,9 +24,9 @@ MovieRecommender is an app that recommends a movie after you answer 7 questions.
 
 4- **Install Dependencies**
 
-    ```
+    
     pip install -r requirements.txt
-    ```
+    
 
 5- **Run**
 
