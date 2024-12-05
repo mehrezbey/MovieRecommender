@@ -30,9 +30,9 @@ MovieRecommender is an app that recommends a movie after you answer 7 questions.
 
 5- **Run**
 
-    ```
+    
     streamlit run movie_recommender.py
-    ```
+    
 
 
 
