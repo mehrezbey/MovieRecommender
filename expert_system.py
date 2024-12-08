@@ -14,7 +14,7 @@ def processFacts(facts:list):
         facts_pd["budget_sup"]  = 500000000
     
     # 2- genre
-    facts_pd["genres"] = facts[1]
+    facts_pd["genres"] = facts[1][:-2]
     
     # 3- superhero
     facts_pd["superheros"]  = "Yes" in  facts[2]

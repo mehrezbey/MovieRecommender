@@ -40,6 +40,17 @@ def another_one():
 if st.session_state.current_question == -1 and not st.session_state.submitted:
     st.title("Welcome to Movie Recommander!")
     st.write("You can’t decide between thousands of movies available for streaming?")
+    st.markdown(
+    """
+    <style>
+    .center-image {
+        display: flex;
+        justify-content: center;
+    }
+    </style>
+    """, 
+    unsafe_allow_html=True
+    )
     st.image(
         "https://media1.tenor.com/m/zDZRlH-tT1sAAAAd/despicable-me-minions.gif",
         width=390
@@ -53,20 +64,23 @@ if st.session_state.current_question == -1 and not st.session_state.submitted:
 elif 0 <= st.session_state.current_question < len(questions) and not st.session_state.submitted:
     current_question = st.session_state.current_question
     st.title(f"Question {current_question + 1}: {questions[current_question]['question']}")
-    
+    my_bar = st.progress((st.session_state.current_question+1)/7,f"{st.session_state.current_question+1} out of 7")
+
+
+
     response = st.radio (
         "Your Answer:",
         options=questions[current_question]["options"],
         index=questions[current_question]["options"].index(st.session_state.responses[current_question])
         if st.session_state.responses[current_question] in questions[current_question]["options"]
-        else 0,
+        else 1,
     )
 
     # Update the response in session state
     st.session_state.responses[current_question] = response
 
     # Navigation buttons
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3 = st.columns([1,4,1])
 
     with col1:
         if current_question > 0:
@@ -86,8 +100,7 @@ elif st.session_state.submitted:
     if not res.empty:
         row = res.sample(n=1).to_dict(orient="records")[0]
         st.session_state.path =return_poster(row["id"])
-
-        st.title("Recommended for you 😎:")
+        st.balloons()
         st.divider()
         left, middle = st.columns(2)
 
@@ -106,6 +119,8 @@ elif st.session_state.submitted:
         if left.button(" Another one ↻",on_click=another_one):
             row = res.sample(n=1).to_dict(orient="records")[0]
             st.session_state.path = return_poster(row["id"])
+            st.balloons()
+
     else:
         st.title("Oops!😔")
         st.title("Sorry We Did Not Find Any Movie According To Your Preferences!")

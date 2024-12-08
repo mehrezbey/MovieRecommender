@@ -14,14 +14,14 @@ class Questions:
         {
             "question": "What genre of movies do you prefer?",
             "options": 
-                ["Action",
-                "Comedy",  
-                "Drama",
-                "Horror",
-                "Science Fiction",
-                "Romance",
-                "Fantasy",
-                "Animation"
+                ["Action 💣",
+                "Comedy 😂",  
+                "Drama 🎭",
+                "Horror 😨",
+                "Science Fiction 👨‍🚀",
+                "Romance 💏",
+                "Fantasy 🧝",
+                "Animation ✍️"
                 ]
         },
         
