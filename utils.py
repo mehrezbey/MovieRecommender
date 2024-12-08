@@ -11,7 +11,6 @@ def return_poster(movie_id):
     }
     base = "https://image.tmdb.org/t/p/original"
     response = (requests.get(url, headers=headers)).json()
-    print(response)
     try:
         if "backdrop_path" in response :
             return base +  response["backdrop_path"]

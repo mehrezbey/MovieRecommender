@@ -85,8 +85,7 @@ def processFacts(facts:list):
 def selectMovies(facts:list):
     df = pd.read_csv("data/movies.csv")
     facts_pd = processFacts(facts)
-    print('-----------')
-    print(facts_pd)
+
     res = df[
         
                 ((df['budget']>facts_pd["budget_inf"])&(df['budget']<facts_pd["budget_sup"]))&

@@ -3,6 +3,8 @@ from questions import Questions
 from utils import return_poster
 from expert_system import selectMovies
 import pandas as pd
+import time
+
 # Initialize session state
 if "current_question" not in st.session_state:
     st.session_state.current_question = -1
@@ -31,7 +33,8 @@ def try_again():
     st.session_state.current_question = -1
     st.session_state.responses = [""] * 10 
     st.session_state.submitted = False
-
+def another_one():
+    time.sleep(0.5)
 
 # Welcome Page
 if st.session_state.current_question == -1 and not st.session_state.submitted:
@@ -83,22 +86,24 @@ elif st.session_state.submitted:
     if not res.empty:
         row = res.sample(n=1).to_dict(orient="records")[0]
         st.session_state.path =return_poster(row["id"])
+
         st.title("Recommended for you 😎:")
         st.divider()
         left, middle = st.columns(2)
-        left.title(row["original_title"])
 
+        left.title(row["original_title"])
         left.image(
             st.session_state.path,
             width=300,
             caption=row["tagline"]
         )
+
         middle.write("**Overview:** " + row["overview"])
         middle.write("**Directed By:** " + row["director"])
         middle.write("**Cast:** " + row["cast"])
         middle.write("**Release Date:** " + row["release_date"])
         st.button("Try Again !", on_click=try_again)
-        if left.button(" Another one ↻"):
+        if left.button(" Another one ↻",on_click=another_one):
             row = res.sample(n=1).to_dict(orient="records")[0]
             st.session_state.path = return_poster(row["id"])
     else:
