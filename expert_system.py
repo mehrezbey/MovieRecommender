@@ -20,7 +20,7 @@ def processFacts(facts:list):
     facts_pd["superheros"]  = "Yes" in  facts[2]
 
     # 4- Language
-    if facts[3] == "English" :
+    if "English"  in facts[3]:
         facts_pd["original_language"]  = "en"
     else:
         facts_pd["original_language"]  = ""
@@ -85,7 +85,6 @@ def processFacts(facts:list):
 def selectMovies(facts:list):
     df = pd.read_csv("data/movies.csv")
     facts_pd = processFacts(facts)
-
     res = df[
         
                 ((df['budget']>facts_pd["budget_inf"])&(df['budget']<facts_pd["budget_sup"]))&
@@ -100,6 +99,7 @@ def selectMovies(facts:list):
         res = res[~res['keywords'].str.contains("marvel", case=False, na=False)]
         res = res[~res['keywords'].str.contains("dc", case=False, na=False)]
         res = res[~res['keywords'].str.contains("comic", case=False, na=False)]
+        
     res.to_csv('data/output.csv', index=False)  # index=False to avoid writing row numbers
     return res
 

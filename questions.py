@@ -74,4 +74,3 @@ class Questions:
                 ]
         },
     ]
-# I don’t have a preference.
